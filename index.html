@@ -117,107 +117,24 @@
         .time-val { font-size: 1.8rem; font-weight: bold; color: var(--primary); display: block; }
         .time-label { font-size: 0.8rem; color: #888; text-transform: uppercase; }
 
-        /* الأزرار الخاصة */
-        .special-btns {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
-        }
-
-        .btn-love, .btn-smash {
+        /* زرار ليه بحبك */
+        .love-btn-container { text-align: center; margin-bottom: 25px; }
+        .btn-love {
+            background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 15px 40px;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 25px rgba(255, 77, 109, 0.5);
             transition: transform 0.3s;
             font-family: 'Reem Kufi', sans-serif;
-            display: flex; align-items: center; gap: 8px;
+            animation: pulse-btn 2s infinite;
         }
-        .btn-love { background: linear-gradient(45deg, #ff4d6d, #ff8fa3); }
-        .btn-smash { background: linear-gradient(45deg, #d90429, #ef233c); animation: pulse-red 2s infinite; }
-        
-        @keyframes pulse-red { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 4, 41, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(217, 4, 41, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 4, 41, 0); } }
-
-        /* --- SMASH ANIMATION STYLES (التكسير) --- */
-        #smash-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 5000; pointer-events: none; display: none;
-            overflow: hidden;
-            justify-content: center; align-items: center;
-            background: rgba(0,0,0,0.2); /* تغميق بسيط عشان التأثير يبان */
-        }
-
-        /* 1. القبضة (Fist Emoji) */
-        .fist-emoji {
-            position: absolute;
-            font-size: 1rem; /* هتبدأ صغيرة */
-            opacity: 0;
-            z-index: 5002;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-        }
-        
-        /* كلاس الأكشن للقبضة */
-        .punching {
-            opacity: 1;
-            transform: scale(20); /* تكبر جداً */
-        }
-
-        /* 2. الكسر (Cracked Screen) */
-        .crack-img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            z-index: 5001;
-            transform: scale(1.1);
-            transition: opacity 0.1s;
-            pointer-events: none;
-        }
-        .cracked-visible { opacity: 0.9; }
-
-        /* 3. الاسم (Reveal) */
-        .reveal-name {
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 5rem;
-            color: #ff0054;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px 40px;
-            border-radius: 20px;
-            text-shadow: 3px 3px 0 #fff, -3px -3px 0 #fff;
-            box-shadow: 0 0 50px rgba(255, 0, 84, 0.5);
-            opacity: 0;
-            z-index: 5003;
-            transform: scale(0);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .name-show { opacity: 1; transform: scale(1); }
-
-        /* 4. الهزة (Shake) */
-        .shake-element {
-            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-        }
-
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-4px, 0, 0) rotate(-2deg); }
-            20%, 80% { transform: translate3d(8px, 0, 0) rotate(4deg); }
-            30%, 50%, 70% { transform: translate3d(-12px, 0, 0) rotate(-6deg); }
-            40%, 60% { transform: translate3d(12px, 0, 0) rotate(6deg); }
-        }
-        
-        .close-smash {
-            position: absolute; top: 30px; right: 30px;
-            font-size: 3rem; color: #d90429; cursor: pointer;
-            z-index: 6000; pointer-events: auto;
-            background: white; border-radius: 50%; padding: 0 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            display: none;
-        }
+        .btn-love:hover { transform: scale(1.05); }
+        @keyframes pulse-btn { 0% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255, 77, 109, 0.7); } 100% { transform: scale(1); } }
 
         /* نافذة الرسالة المنبثقة (Popup) */
         #love-popup {
@@ -227,40 +144,121 @@
             backdrop-filter: blur(5px);
         }
         .popup-content {
-            background: #fff0f3; padding: 40px; border-radius: 30px; text-align: center;
-            max-width: 85%; position: relative; border: 4px solid var(--primary);
-            animation: bounceIn 0.5s; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            background: #fff0f3;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 85%;
+            position: relative;
+            border: 4px solid var(--primary);
+            animation: bounceIn 0.5s;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
-        #popup-text { font-family: 'Reem Kufi', sans-serif; font-size: 1.8rem; color: var(--text); line-height: 1.6; }
-        .close-popup { position: absolute; top: 10px; right: 15px; font-size: 2rem; color: var(--primary); cursor: pointer; transition: 0.3s; }
+        #popup-text {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .close-popup {
+            position: absolute; top: 10px; right: 15px;
+            font-size: 2rem; color: var(--primary);
+            cursor: pointer; transition: 0.3s;
+        }
+        .close-popup:hover { transform: rotate(90deg); }
 
-        .gallery-scroll { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; scroll-snap-type: x mandatory; }
-        .gallery-item { min-width: 250px; height: 350px; border-radius: 20px; scroll-snap-align: center; overflow: hidden; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .gallery-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 15px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .gallery-item {
+            min-width: 250px;
+            height: 350px;
+            border-radius: 20px;
+            scroll-snap-align: center;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        
+
         .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .video-item video { width: 100%; border-radius: 15px; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .video-item video {
+            width: 100%;
+            border-radius: 15px;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
         .music-list { list-style: none; text-align: right; }
-        .song-item { background: #fff5f7; margin: 10px 0; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; cursor: pointer; }
+        .song-item {
+            background: #fff5f7;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
         .song-item:hover { background: #ffe0e6; transform: translateX(-5px); }
         .song-info h4 { font-size: 1.4rem; color: var(--text); letter-spacing: 2px;} 
         .play-icon { color: var(--primary); font-size: 1.5rem; }
 
         .nav-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
-        .nav-btn { background: white; padding: 15px; border-radius: 20px; font-weight: bold; color: var(--primary); text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.2s; }
+        .nav-btn {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
         .nav-btn:active { transform: scale(0.95); }
 
-        .falling-element { position: fixed; top: -30px; animation: fall linear forwards; z-index: -1; text-shadow: 0 0 5px rgba(255, 77, 109, 0.3); }
+        /* القلوب والاسم المتساقط */
+        .falling-element {
+            position: fixed;
+            top: -30px;
+            animation: fall linear forwards;
+            z-index: -1;
+            text-shadow: 0 0 5px rgba(255, 77, 109, 0.3);
+        }
         @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
         @keyframes bounceIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
 
-        .bg-music-control { position: fixed; bottom: 20px; right: 20px; background: white; padding: 12px; border-radius: 50%; box-shadow: 0 5px 20px rgba(0,0,0,0.2); z-index: 999; cursor: pointer; border: 3px solid var(--primary); font-size: 1.5rem; display: none; animation: pulse 2s infinite; }
+        .bg-music-control {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+            cursor: pointer;
+            border: 3px solid var(--primary);
+            font-size: 1.5rem;
+            display: none;
+            animation: pulse 2s infinite;
+        }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     </style>
 </head>
-<body id="app-body">
+<body>
 
     <div id="login-screen">
         <div class="login-box">
@@ -288,9 +286,8 @@
             <p style="margin-top: 10px; font-weight: bold; color: #555;">فاضل شوية وتيجي 2026 ✨</p>
         </div>
 
-        <div class="special-btns">
-            <button class="btn-love" onclick="showLoveReason()"> <i class="fas fa-heart"></i> ليه بحبك؟</button>
-            <button class="btn-smash" onclick="triggerSmash()"> <i class="fas fa-hand-rock"></i> ممنوع الضغط 🚫</button>
+        <div class="love-btn-container">
+            <button class="btn-love" onclick="showLoveReason()">ليه بحبك؟ 🤔❤️</button>
         </div>
 
         <div class="nav-buttons">
@@ -302,6 +299,8 @@
 
         <div class="card" id="gallery">
             <div class="section-title">القمر لما يطل 🌙✨</div>
+            <p style="font-size: 0.9rem; color: #777; margin-bottom: 15px;">(يا أرض احفظي ما عليكي)</p>
+            
             <div class="gallery-scroll">
                 <div class="gallery-item"><img src="https://e.top4top.io/p_3650kwqdm0.jpeg"></div>
                 <div class="gallery-item"><img src="https://f.top4top.io/p_3650zmwpj1.jpeg"></div>
@@ -370,16 +369,6 @@
         </div>
     </div>
 
-    <div id="smash-overlay">
-        <div class="fist-emoji">👊</div>
-        
-        <img src="https://i.imgur.com/f9Z2s2t.png" class="crack-img" alt="Broken Glass">
-        
-        <div class="reveal-name">Shahd ❤️</div>
-        
-        <span class="close-smash" onclick="closeSmash()">&times;</span>
-    </div>
-
     <audio id="bg-music" loop>
         <source src="https://i.top4top.io/m_3650rdy1b1.mp3" type="audio/mpeg">
     </audio>
@@ -430,42 +419,66 @@
             `;
         }, 1000);
 
-        // --- 3. إدارة الصوت والفيديو ---
+        // --- 3. إدارة الصوت والفيديو (الحل النهائي لتداخل الأصوات) ---
         var bgMusic = document.getElementById("bg-music");
         var player = document.getElementById("player-music");
         const allVideos = document.querySelectorAll('video');
 
-        function pauseAllVideos() { allVideos.forEach(video => video.pause()); }
+        // دالة لوقف كل الفيديوهات
+        function pauseAllVideos() {
+            allVideos.forEach(video => video.pause());
+        }
 
+        // تشغيل أغنية من القائمة
         function playSong(url) {
-            bgMusic.pause(); pauseAllVideos(); 
-            player.src = url; player.play();
-            player.onended = function() { bgMusic.play(); };
+            bgMusic.pause(); // وقف الخلفية
+            pauseAllVideos(); // وقف أي فيديو شغال
+            player.src = url;
+            player.play();
+            player.onended = function() {
+                bgMusic.play();
+            };
         }
 
+        // زر التحكم العائم
         function toggleBgMusic() {
-            if (bgMusic.paused) { pauseAllVideos(); player.pause(); bgMusic.play(); } 
-            else { bgMusic.pause(); }
+            if (bgMusic.paused) {
+                pauseAllVideos(); // لو هنشغل الخلفية نوقف الفيديوهات
+                player.pause();
+                bgMusic.play();
+            } else {
+                bgMusic.pause();
+            }
         }
 
+        // عند تشغيل أي فيديو
         allVideos.forEach(video => {
             video.addEventListener('play', () => {
-                bgMusic.pause(); player.pause();  
-                allVideos.forEach(otherVideo => { if (otherVideo !== video) otherVideo.pause(); });
+                bgMusic.pause(); // وقف الخلفية
+                player.pause();  // وقف الأغاني
+                // وقف الفيديوهات التانية
+                allVideos.forEach(otherVideo => {
+                    if (otherVideo !== video) otherVideo.pause();
+                });
             });
-            video.addEventListener('ended', () => { bgMusic.play(); });
+            video.addEventListener('ended', () => {
+                bgMusic.play(); // رجع الخلفية لما يخلص
+            });
         });
 
-        // --- 4. شهودتي المتساقطة ---
+        // --- 4. القلوب واسم "شهودتي" المتساقط ---
         function createFallingElement() {
             const element = document.createElement('div');
             element.classList.add('falling-element');
+            
+            // تم التعديل هنا: اسم شهودتي
             const shapes = ['❤️', '✨', 'شهودتي', '💖'];
             const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
             element.innerHTML = randomShape;
 
+            // تنسيق مختلف للاسم
             if (randomShape === 'شهودتي') {
-                element.style.fontSize = (Math.random() * 15 + 18) + 'px';
+                element.style.fontSize = (Math.random() * 15 + 18) + 'px'; // كبرت الخط شوية عشان الدلع
                 element.style.fontWeight = 'bold';
                 element.style.color = '#ff4d6d';
                 element.style.fontFamily = "'Reem Kufi', sans-serif";
@@ -473,14 +486,16 @@
                 element.style.fontSize = (Math.random() * 20 + 10) + 'px';
                 element.style.color = Math.random() > 0.5 ? '#ff4d6d' : '#ff8fa3';
             }
+            
             element.style.left = Math.random() * 100 + 'vw';
             element.style.animationDuration = Math.random() * 3 + 4 + 's';
+            
             document.body.appendChild(element);
             setTimeout(() => element.remove(), 7000);
         }
         setInterval(createFallingElement, 400);
 
-        // --- 5. زرار ليه بحبك ---
+        // --- 5. زرار ورسائل ليه بحبك ---
         const loveMessages = [
             "عشان ضحكتك بتنور يومي كله ✨",
             "عشان عندك أطيب قلب في الدنيا دي 💖",
@@ -497,58 +512,10 @@
         }
 
         function closePopup(event) {
+            // قفل النافذة لو داس على الـ X أو بره الصندوق
             if (event.target.id === 'love-popup' || event.target.classList.contains('close-popup')) {
                 document.getElementById('love-popup').style.display = 'none';
             }
-        }
-
-        // --- 6. SMASH ANIMATION LOGIC (المعدل) ---
-        function triggerSmash() {
-            const overlay = document.getElementById('smash-overlay');
-            const fist = document.querySelector('.fist-emoji');
-            const crack = document.querySelector('.crack-img');
-            const name = document.querySelector('.reveal-name');
-            const closeBtn = document.querySelector('.close-smash');
-            const body = document.getElementById('app-body');
-
-            overlay.style.display = 'flex';
-            
-            // 1. تكبير القبضة (Animation)
-            setTimeout(() => {
-                fist.classList.add('punching');
-                
-                // 2. بعد ما القبضة تضرب، الشاشة تتهز وتتكسر
-                setTimeout(() => {
-                    body.classList.add('shake-element');
-                    crack.classList.add('cracked-visible');
-                    
-                    // إخفاء القبضة عشان الاسم يبان
-                    fist.style.opacity = '0'; 
-                    
-                    // 3. ظهور الاسم
-                    setTimeout(() => {
-                        name.classList.add('name-show');
-                        closeBtn.style.display = 'block';
-                    }, 500);
-
-                }, 200); 
-            }, 50);
-        }
-
-        function closeSmash() {
-            const overlay = document.getElementById('smash-overlay');
-            overlay.style.display = 'none';
-            
-            // إعادة تعيين الكلاسات
-            document.querySelector('.fist-emoji').classList.remove('punching');
-            document.querySelector('.fist-emoji').style.opacity = '0';
-            document.querySelector('.crack-img').classList.remove('cracked-visible');
-            document.querySelector('.reveal-name').classList.remove('name-show');
-            document.getElementById('app-body').classList.remove('shake-element');
-            document.querySelector('.close-smash').style.display = 'none';
-            
-            // Reset opacity trick
-            document.querySelector('.fist-emoji').style.removeProperty('opacity');
         }
 
     </script>
